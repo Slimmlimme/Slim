@@ -5,7 +5,7 @@ Wall::Wall()
 {
 }
 
-Wall::Wall(int& health, int& x, int& y, char& symbol) : GameObject(x,y,symbol)
+Wall::Wall(int health, int x, int y, char symbol) : GameObject(x,y,symbol)
 {
 	health_ = health;
 }

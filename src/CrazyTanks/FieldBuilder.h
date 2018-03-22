@@ -13,6 +13,7 @@ public:
 	virtual void buildWalls();
 	virtual void buildFortress();
 	virtual void buildGold();
+	virtual const Field& getField() const;
 protected:
 	Field field;
 

@@ -51,10 +51,15 @@ void GameFieldBuilder::buildWalls()
 		health = rand() % 3 + 1;
 		std::shared_ptr<Wall> wall(new Wall(health, x, y, symbol));
 		field.wall(i, *wall);
-		if (x > 1 && x < 28)
+		if (x > 1 && x < 28 && rand() % 2 == 0)
 		{
-			
-			field.wall(j++, *std::make_shared<Wall> (new Wall(health,x+1,y,symbol));
+			field.wall(j++, *std::make_shared<Wall>(new Wall(health, x + 1, y, symbol)));
+			field.wall(j++, *std::make_shared<Wall>(new Wall(health, x - 1, y, symbol)));
+		}
+		if (y > 1 && y < 18 && rand() % 2 == 1)
+		{
+			field.wall(j++, *std::make_shared<Wall>(new Wall(health, x, y - 1, symbol)));
+			field.wall(j++, *std::make_shared<Wall>(new Wall(health, x, y + 1, symbol)));
 		}
 	}
 }
@@ -65,4 +70,9 @@ void GameFieldBuilder::buildFortress()
 
 void GameFieldBuilder::buildGold()
 {
+}
+
+const Field & GameFieldBuilder::getField() const
+{
+	return field;
 }

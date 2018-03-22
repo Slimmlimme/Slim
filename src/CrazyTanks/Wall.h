@@ -5,7 +5,7 @@ class Wall: public GameObject, Place
 {
 public:
 	Wall();
-	Wall(int& health, int& x, int& y, char& symbol);
+	Wall(int health, int x, int y, char symbol);
 	const int& getHealth() const;
 	void getHurt();
 	bool isDestroyed();

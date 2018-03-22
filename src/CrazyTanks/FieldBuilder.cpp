@@ -36,3 +36,7 @@ void FieldBuilder::buildFortress()
 void FieldBuilder::buildGold()
 {
 }
+
+const Field& FieldBuilder::getField() const
+{
+}

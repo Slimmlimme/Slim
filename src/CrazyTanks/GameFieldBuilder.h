@@ -11,4 +11,5 @@ public:
 	void buildWalls();
 	void buildFortress();
 	void buildGold();
+	const Field& getField() const;
 };

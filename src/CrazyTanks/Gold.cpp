@@ -5,7 +5,7 @@ Gold::Gold()
 {
 }
 
-Gold::Gold(int & x, int & y, char & symbol):GameObject(x,y,symbol)
+Gold::Gold(int x, int y, char symbol):GameObject(x,y,symbol)
 {
 }
 
