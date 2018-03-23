@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Director.h"
 
-const Field& Director::createField(FieldBuilder& builder) const
+const ObjectStorage& 
+Director::createObjectStorage(ObjectStorageBuilder& builder) const
 {
-	builder.createField();
-	return builder.getField();
+	builder.createObjectStorage();
+	return builder.getObjectStorage();
 }

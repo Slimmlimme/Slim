@@ -12,22 +12,28 @@ Point::Point(int& x, int& y)
 	y_ = y;
 }
 
-const int& Point::getX() const
+const int& 
+Point::getX() const
 {
 	return x_;
 }
 
-const int& Point::getY() const
+const int& 
+Point::getY() const
 {
 	return y_;
 }
 
-void Point::x(const int& x)
+void 
+Point::x(const int& x)
 {
 	x_ = x;
 }
 
-void Point::y(const int& y)
+void 
+Point::y(const int& y)
 {
 	y_ = y;
 }
+
+

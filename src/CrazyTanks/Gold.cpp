@@ -5,20 +5,31 @@ Gold::Gold()
 {
 }
 
-Gold::Gold(int x, int y, char symbol):GameObject(x,y,symbol)
+Gold::Gold(int x, int y, char symbol):Object(x,y,symbol)
 {
+	health_ = getGoldHealth();
 }
 
-bool Gold::getHurt()
+void 
+Gold::getHurt()
 {
-	return true;
+	health_--;
+}
+
+const int& 
+Gold::getHealth() const
+{
+	return health_;
 }
 
 Gold::~Gold()
 {
 }
 
-std::vector<std::string> Gold::place(std::vector<std::string>& square)
+std::vector<std::string> Gold::place(std::vector<std::string>& field)
 {
-	return std::vector<std::string>();
+	std::vector<std::string> _field = field;
+	_field[getPoint().getY()][getPoint().getX()] = getBackgroundSymbol();
+	_field[getPoint().getY()][getPoint().getX()] = getSymbol();
+	return _field;
 }

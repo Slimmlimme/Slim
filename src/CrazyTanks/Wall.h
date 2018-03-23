@@ -1,7 +1,7 @@
 #pragma once
-#include "GameObject.h"
+#include "Object.h"
 
-class Wall: public GameObject, Place
+class Wall: public Object, Place
 {
 public:
 	Wall();
@@ -10,7 +10,7 @@ public:
 	void getHurt();
 	bool isDestroyed();
 	~Wall();
-	std::vector<std::string> place(std::vector<std::string>& square);
+	std::vector<std::string> place(std::vector<std::string>& field);
 private:
 	int health_;
 };

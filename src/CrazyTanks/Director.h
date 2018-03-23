@@ -1,7 +1,8 @@
 #pragma once
-#include "FieldBuilder.h"
+#include "ObjectStorageBuilder.h"
 
 class Director
 {
-	const Field& createField(FieldBuilder& builder) const;
+public:
+	const ObjectStorage& createObjectStorage(ObjectStorageBuilder& builder) const;
 };
