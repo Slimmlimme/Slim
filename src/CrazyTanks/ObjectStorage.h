@@ -1,10 +1,11 @@
-#pragma once
 #include "Tank.h"
 #include "Bullet.h"
 #include "Wall.h"
 #include "Gold.h"
 #include "Field.h"
 #include "Info.h"
+#ifndef H_OBJECTSTORAGE
+#define H_OBJECTSTORAGE
 
 class ObjectStorage
 {
@@ -45,3 +46,4 @@ private:
 	Gold gold_;
 	Info info_;
 };
+#endif // !H_OBJECTSTORAGE

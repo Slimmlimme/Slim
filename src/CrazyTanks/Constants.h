@@ -1,6 +1,9 @@
-#pragma once
+#ifndef H_CONSTANTS
+#define H_CONSTANTS
+
+
 #pragma warning( disable : 4309 )
-inline int 
+inline int
 getFieldHeight()
 {
 	return 20;
@@ -168,3 +171,4 @@ getStartScore()
 	return 0;
 }
 #pragma warning( default : 4309 )
+#endif // !H_CONSTANTS

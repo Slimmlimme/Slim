@@ -1,6 +1,7 @@
-#pragma once
 #include "Object.h"
 #include "Constants.h"
+#ifndef H_GOLD
+#define H_GOLD
 
 class Gold : public Object, Place
 {
@@ -14,3 +15,4 @@ public:
 private:
 	int health_;
 };
+#endif // !H_GOLD

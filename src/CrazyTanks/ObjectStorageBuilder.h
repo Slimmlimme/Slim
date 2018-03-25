@@ -1,5 +1,6 @@
-#pragma once
 #include "ObjectStorage.h"
+#ifndef H_OBJECTSTORAGEBUILDER
+#define H_OBJECTSTORAGEBUILDER
 
 class ObjectStorageBuilder
 {
@@ -19,3 +20,4 @@ protected:
 	ObjectStorage objectStorage;
 
 };
+#endif // !H_OBJECTSTORAGEBUILDER

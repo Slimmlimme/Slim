@@ -1,7 +1,8 @@
-#pragma once
 #include <vector>
 #include <string>
 #include "Constants.h"
+#ifndef H_FIELD
+#define H_FIELD
 
 class Field
 {
@@ -16,3 +17,5 @@ private:
 	int length_;
 	int height_;
 };
+
+#endif // !H_FIELD

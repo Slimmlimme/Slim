@@ -1,16 +1,17 @@
-#pragma once
 #include "Point.h"
 #include "Place.h"
 #include <vector>
 #include <string>
 #include <memory>
 #include "Constants.h"
+#ifndef H_OBJECT
+#define H_OBJECT
 
 class Object
 {
 public:
 	Object();
-	Object(int& x, int& y, char& symbol);
+	Object(const int& x, const int& y, const char& symbol);
 	const Point& getPoint() const;
 	void point(const int& x, const int& y);
 	const Point& getPointOld() const;
@@ -22,3 +23,4 @@ private:
 	Point pointOld_;
 	char symbol_;
 };
+#endif // !H_OBJECT

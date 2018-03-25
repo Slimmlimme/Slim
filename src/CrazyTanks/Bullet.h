@@ -1,11 +1,12 @@
-#pragma once
 #include "Object.h"
+#ifndef H_BULLET
+#define H_BULLET
 
 class Bullet : public Object
 {
 public:
 	Bullet();
-	Bullet(int direction, int x, int y, bool playerBullet, char symbol);
+	Bullet(const int& direction,const int& x, const int& y, bool playerBullet, const char& symbol);
 	void move();
 	const bool& collision() const;
 	bool isPlayerBullet();
@@ -18,3 +19,4 @@ private:
 	int direction_;
 	bool playerBullet_;
 };
+#endif

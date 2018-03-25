@@ -5,7 +5,7 @@ Drawer::Drawer()
 {
 }
 
-Drawer::Drawer(Field field, Info info)
+Drawer::Drawer(const Field& field, const Info& info)
 {
 	field_ = field;
 	info_ = info;

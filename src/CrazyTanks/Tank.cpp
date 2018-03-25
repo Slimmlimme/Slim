@@ -47,7 +47,7 @@ Tank::move()
 }
 
 bool 
-Tank::behavior(std::vector<std::string> square, int xPlayer, int yPlayer, int xGold, int yGold)
+Tank::behavior(const std::vector<std::string>& square, const int& xPlayer,const int& yPlayer,const int& xGold,const int& yGold)
 {
 	if (isPlayer_) {
 		if (_kbhit()) {
@@ -55,25 +55,44 @@ Tank::behavior(std::vector<std::string> square, int xPlayer, int yPlayer, int xG
 			case 72:
 				move();
 				direction_ = getDirectionUp();
-				break;
+				return false;
 			case 80:
 				move();
 				direction_ = getDirectionDown();
-				break;
+				return false;
 			case 75:
 				move();
 				direction_ = getDirectionLeft();
-				break;
+				return false;
 			case 77:
 				move();
 				direction_ = getDirectionRight();
-				break;
+				return false;
 			case 32:
 				return true;
+			default:
+				return false;
 			};
 		}
+		else return false;
 	} 
-	return false;
+	else {
+		if (xPlayer > getPoint().getX()) {
+			direction_ = 2;
+			move();
+		}
+		if (xPlayer < getPoint().getX()) {
+			direction_ = 4;
+			move();
+		}
+		if (xPlayer == getPoint().getX()) {
+			if (yPlayer > getPoint().getY())
+				direction_ = 3;
+			else direction_ = 1;
+			return true;
+		}
+		return false;
+	}
 	//else{
 	//	int xDistanceGold, xDistancePlayer;
 	//	int yDistanceGold, yDistancePlayer;

@@ -6,10 +6,12 @@ Point::Point()
 {
 }
 
-Point::Point(int& x, int& y)
+Point::Point(const std::initializer_list<int>& coords)
 {
-	x_ = x;
-	y_ = y;
+	auto it = coords.begin();
+	x_ = *it;
+	it++;
+	y_ = *it;
 }
 
 const int& 
@@ -25,7 +27,7 @@ Point::getY() const
 }
 
 void 
-Point::x(const int& x)
+Point::setX(const int& x)
 {
 	x_ = x;
 }

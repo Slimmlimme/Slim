@@ -5,7 +5,7 @@ Bullet::Bullet()
 {
 }
 
-Bullet::Bullet(int direction, int x, int y, bool playerBullet, char symbol) : Object(x,y,symbol)
+Bullet::Bullet(const int& direction,const int& x,const int& y, bool playerBullet,const char& symbol) : Object(x,y,symbol)
 {
 	direction_ = direction;
 	playerBullet_ = playerBullet;

@@ -41,8 +41,10 @@ Game::run()
 				case 4:
 					_x--;
 					break;
+				default:
+					break;
 				}
-				Bullet bullet(tank.getDirection(), _x, _y, getEnemySymbol(), tank.isPlayer());
+				Bullet bullet(tank.getDirection(), _x, _y, tank.isPlayer(), getEnemySymbol());
 				STORAGE.bullet(getMaxNumberOfBullets(), bullet);
 			}
 			switch (tank.getDirection()) {
@@ -57,6 +59,8 @@ Game::run()
 				break;
 			case 4:
 				x--;
+				break;
+			default:
 				break;
 			}
 			if (_field[y][x] == getEnemySymbol() ||
@@ -87,9 +91,11 @@ Game::run()
 			case 4:
 				x--;
 				break;
+			default:
+				break;
 			}
-			if (bullet.collision()&& i > 0) {
-				Point point(x, y);
+			if (bullet.collision()) {
+				Point point{x, y};
 				STORAGE.collide(STORAGE.getObjectSymbol(point),point,bullet.isPlayerBullet());
 				STORAGE.deleteBullet(i);
 				if(i > 0)

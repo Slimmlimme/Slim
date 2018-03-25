@@ -1,4 +1,5 @@
-#pragma once
+#ifndef H_INFO
+#define H_INFO
 
 class Info
 {
@@ -17,3 +18,4 @@ private:
 	int beginTime_;
 	int currentTime_;
 };
+#endif // !H_INFO

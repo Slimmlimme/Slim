@@ -5,10 +5,10 @@ Object::Object()
 {
 }
 
-Object::Object(int& x, int& y, char& symbol)
+Object::Object(const int& x, const int& y, const char& symbol)
 {
-	point_ = Point(x,y);
-	pointOld_ = Point(x,y);
+	point_ = Point{ x,y };
+	pointOld_ = Point{x, y};
 	symbol_ = symbol;
 }
 
@@ -21,7 +21,7 @@ Object::getPoint() const
 void 
 Object::point(const int& x, const int& y)
 {
-	point_.x(x);
+	point_.setX(x);
 	point_.y(y);
 }
 
@@ -34,7 +34,7 @@ Object::getPointOld() const
 void 
 Object::pointOld(const int& x, const int& y)
 {
-	pointOld_.x(x);
+	pointOld_.setX(x);
 	pointOld_.y(y);
 }
 

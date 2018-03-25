@@ -1,9 +1,10 @@
-#pragma once
 #include "Director.h"
 #include "Drawer.h"
 #include "ObjectStorage.h"
 #include "GameObjectStorageBuilder.h"
 #include "Constants.h"
+#ifndef H_GAME
+#define H_GAME
 #define PLAYER objectStorage_.getTank(getPlayerTankIndex())
 #define STORAGE objectStorage_
 
@@ -20,3 +21,4 @@ private:
 	bool gameOver_;
 	std::string text_;
 };
+#endif // !H_GAME

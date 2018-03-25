@@ -1,6 +1,7 @@
-#pragma once
 #include "ObjectStorageBuilder.h"
 #include "Constants.h"
+#ifndef H_GAMEOBJECTSTORAGEBUILDER
+#define H_GAMEOBJECTSTORAGEBUILDER
 
 class GameObjectStorageBuilder: public ObjectStorageBuilder
 {
@@ -16,3 +17,4 @@ public:
 	void buildInfo();
 	const ObjectStorage& getObjectStorage() const;
 };
+#endif // !H_GAMEOBJECTSTORAGEBUILDER
