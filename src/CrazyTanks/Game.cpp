@@ -105,6 +105,11 @@ Game::run()
 		objectStorage_.info (info);
 	}
 	std::cout << std::endl << text_ << std::endl;
+	bool exit = false;
+	while (!exit) {
+		if (_getch() == 32)
+			exit = true;
+	}
 }
 
 void 
@@ -130,7 +135,7 @@ Game::placeObjects()
 	_field = gold.place(_field);
 	if (gold.getHealth() == 0){
 		gameOver_ = true;
-		text_ = "You lost(";
+		text_ = "You lost, gold destroyed";
 	}
 
 	//place fortress
@@ -157,7 +162,7 @@ Game::placeObjects()
 	_field = player.place (_field);
 	if (!objectStorage_.getTank(getPlayerTankIndex()).isAlive()) {
 		gameOver_ = true;
-		text_ = "You lost(";
+		text_ = "You lost, player died";
 	}
 
 	//place enemies
