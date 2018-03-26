@@ -5,7 +5,7 @@ Field::Field()
 {
 }
 
-Field::Field(int length, int height)
+Field::Field(const int& length, const int& height)
 {
 	length_ = length;
 	height_ = height;
@@ -13,8 +13,8 @@ Field::Field(int length, int height)
 		std::string row = "";
 		for (int j = 0; j < length_; j++){
 			if (i == 0 || j == 0 || i == height_ - 1 || j == length_ - 1)
-				row.push_back(getBorderSymbol());
-			else row.push_back(getBackgroundSymbol());
+				row.push_back (getBorderSymbol());
+			else row.push_back (getBackgroundSymbol());
 		}
 		field_.push_back(row);
 	}
@@ -27,9 +27,9 @@ Field::getField() const
 }
 
 void 
-Field::field(const std::vector<std::string>& square)
+Field::field(const std::vector<std::string>& field)
 {
-	field_ = square;
+	field_ = field;
 }
 
 Field::~Field()

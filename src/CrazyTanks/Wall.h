@@ -6,12 +6,12 @@ class Wall: public Object, Place
 {
 public:
 	Wall();
-	Wall(int health, int x, int y, char symbol);
+	Wall(const int& health, const int& x, const int& y, const char& symbol);
 	const int& getHealth() const;
 	void getHurt();
 	bool isDestroyed();
 	~Wall();
-	std::vector<std::string> place(std::vector<std::string>& field);
+	std::vector<std::string> place(const std::vector<std::string>& field);
 private:
 	int health_;
 };

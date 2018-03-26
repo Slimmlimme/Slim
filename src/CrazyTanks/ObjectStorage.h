@@ -11,10 +11,10 @@ class ObjectStorage
 {
 public:
 	ObjectStorage();
-	char getObjectSymbol(Point& point);
-	void collide(const char& ObjectHit,const Point& ObjectPoint,const bool& playerBullet);
+	char getObjectSymbol(const Point& point);
+	void collide(const char& ObjectHit, const Point& ObjectPoint, const bool& playerBullet);
 	const Field& getField() const;
-	void field(Field& square);
+	void field(const Field& field);
 	const Tank& getTank(const int& index) const;
 	void tank(const int& index, const Tank& enemy);
 	const int& sizeOfWalls() const;
@@ -30,7 +30,7 @@ public:
 	const Wall& getWall(const int& index) const;
 	void wall(const int& index, const Wall& wall);
 	const Wall& getFortressWall(const int& index) const;
-	void fortressWall(const int& index, Wall& wall);
+	void fortressWall(const int& index, const Wall& wall);
 	const Gold& getGold() const;
 	void gold(const Gold& gold);
 	const Info& getInfo() const;

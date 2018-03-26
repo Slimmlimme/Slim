@@ -5,10 +5,19 @@ Tank::Tank()
 {
 }
 
-Tank::Tank(int health, int x, int y, char symbol, bool isPlayer) : Object(x, y, symbol)
+Tank::Tank(const int& health, const int& x, const int& y, const char& symbol, const bool isPlayer) : Object(x, y, symbol)
 {
 	isPlayer_ = isPlayer;
 	health_ = health;
+	cooldown_ = clock();
+}
+
+const bool
+Tank::isAlive() const
+{
+	if (health_ > 0)
+		return true;
+	else return false;
 }
 
 
@@ -42,8 +51,18 @@ Tank::move()
 		case 4:
 			point(getPoint().getX() - 1, getPoint().getY());
 			break;
+		default:
+			break;
 		}
 	}
+}
+
+bool 
+Tank::isReadyForAction()
+{
+	if (clock() - cooldown_ > getActionCooldown())
+		return true;
+	else return false;
 }
 
 bool 
@@ -77,59 +96,90 @@ Tank::behavior(const std::vector<std::string>& square, const int& xPlayer,const 
 		else return false;
 	} 
 	else {
-		if (xPlayer > getPoint().getX()) {
-			direction_ = 2;
-			move();
-		}
-		if (xPlayer < getPoint().getX()) {
-			direction_ = 4;
-			move();
-		}
-		if (xPlayer == getPoint().getX()) {
-			if (yPlayer > getPoint().getY())
-				direction_ = 3;
-			else direction_ = 1;
-			return true;
+		if (isReadyForAction()) {
+			cooldown_ = clock();
+			int distanceXGold, distanceYGold, distanceXPlayer, distanceYPlayer;
+			distanceXGold = abs(xGold - getPoint().getX());
+			distanceYGold = abs(yGold - getPoint().getY());
+			distanceXPlayer = abs(xPlayer - getPoint().getX());
+			distanceYPlayer = abs(yPlayer - getPoint().getY());
+			if (sqrt(pow(distanceXGold, 2) + pow(distanceYGold, 2)) > sqrt((pow(distanceXPlayer, 2) + pow(distanceYPlayer, 2)))) {
+				if (abs(getPoint().getX() - xPlayer) <= abs(getPoint().getY() - yPlayer)) {
+					if (xPlayer > getPoint().getX()) {
+						direction_ = getDirectionRight();
+						move();
+					}
+					if (xPlayer < getPoint().getX()) {
+						direction_ = getDirectionLeft();
+						move();
+					}
+					if (xPlayer == getPoint().getX()) {
+						if (yPlayer >= getPoint().getY())
+							direction_ = getDirectionDown();
+						if (yPlayer < getPoint().getY())
+							direction_ = getDirectionUp();
+						return true;
+					}
+				}
+				else {
+					if (yPlayer > getPoint().getY()) {
+						direction_ = getDirectionDown();
+						move();
+					}
+					if (yPlayer < getPoint().getY()) {
+						direction_ = getDirectionUp();
+						move();
+					}
+					if (yPlayer == getPoint().getY()) {
+						if (xPlayer >= getPoint().getX())
+							direction_ = getDirectionRight();
+						if (xPlayer < getPoint().getX())
+							direction_ = getDirectionLeft();
+						return true;
+					}
+				}
+				return false;
+			}
+			else {
+				if (abs(getPoint().getX() - xGold) <= abs(getPoint().getY() - yGold)) {
+					if (xGold > getPoint().getX()) {
+						direction_ = getDirectionRight();
+						move();
+					}
+					if (xGold < getPoint().getX()) {
+						direction_ = getDirectionLeft();
+						move();
+					}
+					if (xGold == getPoint().getX()) {
+						if (yGold >= getPoint().getY())
+							direction_ = getDirectionDown();
+						if (yGold < getPoint().getY())
+							direction_ = getDirectionUp();
+						return true;
+					}
+				}
+				else {
+					if (yGold > getPoint().getY()) {
+						direction_ = getDirectionDown();
+						move();
+					}
+					if (yGold < getPoint().getY()) {
+						direction_ = getDirectionUp();
+						move();
+					}
+					if (yGold == getPoint().getY()) {
+						if (xGold >= getPoint().getX())
+							direction_ = getDirectionRight();
+						if (xGold < getPoint().getX())
+							direction_ = getDirectionLeft();
+						return true;
+					}
+				}
+				return false;
+			}
 		}
 		return false;
 	}
-	//else{
-	//	int xDistanceGold, xDistancePlayer;
-	//	int yDistanceGold, yDistancePlayer;
-	//	xDistanceGold = getPoint().getX() - xGold;
-	//	yDistanceGold = getPoint().getY() - yGold;
-	//	xDistancePlayer = getPoint().getX() - xPlayer;
-	//	yDistancePlayer = getPoint().getY() - yPlayer;
-	//	int diagonalDistanceGold, diagonalDistancePlayer;
-	//	diagonalDistanceGold = sqrt(xGold*xGold + yGold * yGold);
-	//	diagonalDistancePlayer = sqrt(xPlayer*xPlayer + yPlayer * yPlayer);
-	//	if (getPoint().getY() != yGold){
-	//		direction_ = getDirectionDown();
-	//		move();
-	//	}
-	//	else {
-	//		if (xGold > getPoint().getX()) {
-	//			direction_ = getDirectionRight();
-	//			return true;
-	//		}
-	//		if (xGold < getPoint().getX()) {
-	//			direction_ = getDirectionLeft();
-	//			return true;
-	//		}
-	//	}
-	//	/*if (getPoint().getX() == xGold || getPoint().getY() == yGold || getPoint().getX() == xPlayer || getPoint().getY() == yPlayer) {
-	//		if ((getPoint().getX() - xGold > 0 && getPoint().getY() == yGold) || (getPoint().getX() - xPlayer > 0 && getPoint().getY() == yPlayer) )
-	//			direction_ = getDirectionLeft();
-	//		if ((getPoint().getX() - xGold < 0 && getPoint().getY() == yGold) || (getPoint().getX() - xPlayer < 0 && getPoint().getY() == yPlayer))
-	//			direction_ = getDirectionRight();
-	//		if ((getPoint().getY() - yGold > 0 && getPoint().getX() == xGold) || (getPoint().getY() - yPlayer > 0 && getPoint().getX() == xPlayer))
-	//			direction_ = getDirectionUp();
-	//		if ((getPoint().getY() - yGold < 0 && getPoint().getX() == xGold) || getPoint().getY() - yPlayer > 0 && getPoint().getX() == yPlayer)
-	//			direction_ = getDirectionDown();*/
-
-	//	//}
-	//	return false();
-	//}
 }
 
 bool 
@@ -160,12 +210,13 @@ Tank::~Tank()
 {
 }
 
-std::vector<std::string> Tank::place(std::vector<std::string>& field)
+std::vector<std::string> 
+Tank::place(const std::vector<std::string>& field)
 {
 	std::vector<std::string> _field = field;
 	_field[getPointOld().getY()][getPointOld().getX()] = getBackgroundSymbol();
 	_field[getPoint().getY()][getPoint().getX()] = getSymbol();
-	if (health_ == 0)
+	if (!isAlive())
 		_field[getPoint().getY()][getPoint().getX()] = getBackgroundSymbol();
 	return _field;
 }

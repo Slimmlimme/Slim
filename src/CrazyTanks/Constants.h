@@ -9,10 +9,46 @@ getFieldHeight()
 	return 20;
 }
 
+inline int
+getActionCooldown()
+{
+	return 1500;
+}
+
+inline int
+getArrayBeginIndex()
+{
+	return 0;
+}
+
 inline int 
 getFieldLength()
 {
 	return 30;
+}
+
+inline int
+getFieldBeginX()
+{
+	return 1;
+}
+
+inline int
+getFieldBeginY()
+{
+	return 1;
+}
+
+inline int
+getFieldEndX()
+{
+	return getFieldLength() - 2;
+}
+
+inline int
+getFieldEndY()
+{
+	return getFieldHeight() - 2;
 }
 
 inline int 
@@ -78,7 +114,7 @@ getEnemiesAmount()
 inline int 
 getMaxWallHealth()
 {
-	return 3;
+	return 5;
 }
 
 inline int 
@@ -97,6 +133,12 @@ inline int
 getPlayerTankIndex()
 {
 	return 0;
+}
+
+inline int
+getEnemyTankBeginIndex()
+{
+	return getPlayerTankIndex() + 1;
 }
 
 inline char 

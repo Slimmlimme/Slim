@@ -5,7 +5,7 @@ Gold::Gold()
 {
 }
 
-Gold::Gold(int x, int y, char symbol):Object(x,y,symbol)
+Gold::Gold(const int& x, const int& y, const char& symbol) : Object(x, y, symbol)
 {
 	health_ = getGoldHealth();
 }
@@ -22,14 +22,21 @@ Gold::getHealth() const
 	return health_;
 }
 
+const bool Gold::isAlive() const
+{
+	if (health_ > 0)
+		return true;
+	else return false;
+}
+
 Gold::~Gold()
 {
 }
 
-std::vector<std::string> Gold::place(std::vector<std::string>& field)
+std::vector<std::string> 
+Gold::place(const std::vector<std::string>& field)
 {
 	std::vector<std::string> _field = field;
-	_field[getPoint().getY()][getPoint().getX()] = getBackgroundSymbol();
 	_field[getPoint().getY()][getPoint().getX()] = getSymbol();
 	return _field;
 }

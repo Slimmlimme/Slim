@@ -10,10 +10,10 @@ public:
 	void move();
 	const bool& collision() const;
 	bool isPlayerBullet();
-	void canMove(const bool& canMove);
+	void canMove(const bool canMove);
 	const int& getDirection() const;
 	~Bullet();
-	std::vector<std::string> place(std::vector<std::string>& field);
+	std::vector<std::string> place(const std::vector<std::string>& field);
 private:
 	bool canMove_;
 	int direction_;

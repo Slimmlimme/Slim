@@ -7,11 +7,12 @@ class Gold : public Object, Place
 {
 public:
 	Gold();
-	Gold(int x, int y, char symbol);
+	Gold(const int& x, const int& y, const char& symbol);
 	void getHurt();
 	const int& getHealth() const;
+	const bool isAlive() const;
 	~Gold();
-	std::vector<std::string> place(std::vector<std::string>& square);
+	std::vector<std::string> place(const std::vector<std::string>& field);
 private:
 	int health_;
 };

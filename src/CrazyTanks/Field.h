@@ -8,7 +8,7 @@ class Field
 {
 public:
 	Field();
-	Field(int length, int height);
+	Field(const int& length, const int& height);
 	const std::vector<std::string>& getField() const;
 	void field(const std::vector<std::string>& field);
 	~Field();

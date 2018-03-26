@@ -5,7 +5,7 @@ class Info
 {
 public:
 	Info();
-	Info(int score, int beginTime);
+	Info(const int& score, const int& beginTime);
 	const int& getScore() const;
 	void score(const int& score);
 	const int& getPlayerHealth() const;

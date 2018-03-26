@@ -11,57 +11,41 @@ Game::run()
 	GameObjectStorageBuilder builder;
 	objectStorage_ = director_.createObjectStorage(builder);
 	placeObjects();
-	drawer_ = Drawer(objectStorage_.getField(), objectStorage_.getInfo());
+	drawer_ = Drawer (objectStorage_.getField(), objectStorage_.getInfo());
 	gameOver_ = false;
 	while (!gameOver_){
 		placeObjects();
 		Field field = objectStorage_.getField();
-		drawer_.field(field);
+		drawer_.field (field);
 		Info info = objectStorage_.getInfo();
-		drawer_.info(info);
+		drawer_.info (info);
 		drawer_.draw();
 		std::vector<std::string> _field = field.getField();
-		for (int i = 0; i < objectStorage_.sizeOfTanks(); i++){
+		for (int i = getArrayBeginIndex(); i < objectStorage_.sizeOfTanks(); i++){
 			Tank tank = objectStorage_.getTank(i);
 			int x = tank.getPoint().getX();
 			int y = tank.getPoint().getY();
-			if (tank.behavior(field.getField(), PLAYER.getPoint().getX(), PLAYER.getPoint().getX(),STORAGE.getGold().getPoint().getX(),STORAGE.getGold().getPoint().getY())) {
-				int _x = x;
-				int _y = y;
-				switch (tank.getDirection()) {
-				case 1:
-					_y--;
-					break;
-				case 2:
-					_x++;
-					break;
-				case 3:
-					_y++;
-					break;
-				case 4:
-					_x--;
-					break;
-				default:
-					break;
-				}
-				Bullet bullet(tank.getDirection(), _x, _y, tank.isPlayer(), getEnemySymbol());
-				STORAGE.bullet(getMaxNumberOfBullets(), bullet);
-			}
 			switch (tank.getDirection()) {
-			case 1:
+			case 1 :
 				y--;
 				break;
-			case 2:
+			case 2 :
 				x++;
 				break;
-			case 3:
+			case 3 :
 				y++;
 				break;
-			case 4:
+			case 4 :
 				x--;
 				break;
-			default:
+			default :
 				break;
+			}
+			if (tank.behavior (field.getField(), PLAYER.getPoint().getX(), PLAYER.getPoint().getY(), STORAGE.getGold().getPoint().getX(), STORAGE.getGold().getPoint().getY())) {
+				int _x = tank.getPoint().getX();
+				int _y = tank.getPoint().getY();
+				Bullet bullet(tank.getDirection(), _x, _y, tank.isPlayer(), getEnemySymbol());
+				STORAGE.bullet(getMaxNumberOfBullets(), bullet);
 			}
 			if (_field[y][x] == getEnemySymbol() ||
 				_field[y][x] == getPlayerSymbol() ||
@@ -74,51 +58,51 @@ Game::run()
 			else tank.canMove(true);
 			STORAGE.tank(i, tank);
 		}
-		for (int i = 0; i < STORAGE.sizeOfBullets(); i++) {
+		for (int i = getArrayBeginIndex(); i < STORAGE.sizeOfBullets();) {
 			Bullet bullet = STORAGE.getBullet(i);
 			int x = bullet.getPoint().getX();
 			int y = bullet.getPoint().getY();
 			switch (bullet.getDirection()) {
-			case 1:
+			case 1 :
 				y--;
 				break;
-			case 2:
+			case 2 :
 				x++;
 				break;
-			case 3:
+			case 3 :
 				y++;
 				break;
-			case 4:
+			case 4 :
 				x--;
 				break;
-			default:
+			default :
 				break;
 			}
 			if (bullet.collision()) {
 				Point point{x, y};
-				STORAGE.collide(STORAGE.getObjectSymbol(point),point,bullet.isPlayerBullet());
+				STORAGE.collide (STORAGE.getObjectSymbol (point), point,bullet.isPlayerBullet());
+				_field = bullet.place (_field);
 				STORAGE.deleteBullet(i);
-				if(i > 0)
-					i--;
 			}
-			if (_field[y][x] == getEnemySymbol() ||
-				_field[y][x] == getPlayerSymbol()||
-				_field[y][x] == getWallSymbol() ||
-				_field[y][x] == getBorderSymbol() ||
-				_field[y][x] == getGoldSymbol() ||
-				_field[y][x] == getFortressSymbol()) {
-				bullet.canMove(false);
+			else {
+				if ((_field[y][x] == getEnemySymbol() && bullet.isPlayerBullet()) ||
+					(_field[y][x] == getPlayerSymbol() && !bullet.isPlayerBullet()) ||
+					_field[y][x] == getWallSymbol() ||
+					_field[y][x] == getBorderSymbol() ||
+					_field[y][x] == getGoldSymbol() ||
+					_field[y][x] == getFortressSymbol()) {
+					bullet.canMove(false);
+				}
+				else bullet.canMove(true);
+				bullet.move();
+				STORAGE.bullet (i, bullet);
+				i++;
 			}
-			else bullet.canMove(true);
-			bullet.move();
-			STORAGE.bullet(i, bullet);
 		}
-		STORAGE.field(field);
-		if (PLAYER.getHealth() == 0)
-			gameOver_ = true;
+		STORAGE.field (field);
 		info.playerHealth(PLAYER.getHealth());
-		info.score(6 - objectStorage_.sizeOfTanks());
-		objectStorage_.info(info);
+		info.score(6 - STORAGE.sizeOfTanks());
+		objectStorage_.info (info);
 	}
 	std::cout << std::endl << text_ << std::endl;
 }
@@ -130,10 +114,10 @@ Game::placeObjects()
 	std::vector<std::string> _field = field.getField();
 
 	//place walls
-	for (int i = 0; i < objectStorage_.sizeOfWalls(); i++){
+	for (int i = getArrayBeginIndex(); i < objectStorage_.sizeOfWalls(); i++){
 		
 		Wall wall = objectStorage_.getWall(i);
-		_field = wall.place(_field);
+		_field = wall.place (_field);
 		if (wall.getHealth() == 0) {
 			objectStorage_.deleteWall(i);
 			if (i > 0)
@@ -150,29 +134,37 @@ Game::placeObjects()
 	}
 
 	//place fortress
-	for (int i = 0; i < objectStorage_.sizeOfFortress(); i++){
+	for (int i = getArrayBeginIndex(); i < objectStorage_.sizeOfFortress(); i++){
 		Wall wall = objectStorage_.getFortressWall(i);
-		_field = wall.place(_field);
-		if (wall.getHealth() == 0) {
+		_field = wall.place (_field);
+		if (wall.isDestroyed()) {
 			objectStorage_.deleteFortressWall(i);
 			if (i > 0)
 				i--;
 		}
 	}
 
+	//place bullet
+	if (objectStorage_.sizeOfBullets() != 0) {
+		for (int i = getArrayBeginIndex(); i < objectStorage_.sizeOfBullets(); i++) {
+			Bullet bullet = objectStorage_.getBullet(i);
+			_field = bullet.place (_field);
+		}
+	}
+
 	//place player
 	Tank player = objectStorage_.getTank(getPlayerTankIndex());
-	_field = player.place(_field);
-	if (player.getHealth() == 0) {
+	_field = player.place (_field);
+	if (!objectStorage_.getTank(getPlayerTankIndex()).isAlive()) {
 		gameOver_ = true;
 		text_ = "You lost(";
 	}
 
 	//place enemies
-	for (int i = 1; i < objectStorage_.sizeOfTanks(); i++){
+	for (int i = getEnemyTankBeginIndex(); i < objectStorage_.sizeOfTanks(); i++){
 		Tank enemy = objectStorage_.getTank(i);
-		_field = enemy.place(_field);
-		if (enemy.getHealth() == 0) {
+		_field = enemy.place (_field);
+		if (!enemy.isAlive()) {
 			objectStorage_.deleteTank(i);
 			if (i > 1)
 				i--;
@@ -184,14 +176,6 @@ Game::placeObjects()
 	}
 
 
-	//place bullet
-	if (objectStorage_.sizeOfBullets() != 0){
-		for (int i = 1; i < objectStorage_.sizeOfBullets(); i++){
-			Bullet bullet = objectStorage_.getBullet(i);
-			_field = bullet.place(_field);
-		}
-	}
-
-	field.field(_field);
-	objectStorage_.field(field);
+	field.field (_field);
+	objectStorage_.field (field);
 }

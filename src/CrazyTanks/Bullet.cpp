@@ -5,7 +5,7 @@ Bullet::Bullet()
 {
 }
 
-Bullet::Bullet(const int& direction,const int& x,const int& y, bool playerBullet,const char& symbol) : Object(x,y,symbol)
+Bullet::Bullet(const int& direction, const int& x, const int& y, bool playerBullet, const char& symbol) : Object(x, y, symbol)
 {
 	direction_ = direction;
 	playerBullet_ = playerBullet;
@@ -17,17 +17,19 @@ Bullet::move()
 	pointOld(getPoint().getX(), getPoint().getY());
 	if (canMove_) {
 		switch (direction_) {
-		case 1:
-			point(getPoint().getX(), getPoint().getY() - 1);
+		case 1 :
+			point (getPoint().getX(), getPoint().getY() - 1);
 			break;
-		case 2:
-			point(getPoint().getX() + 1, getPoint().getY());
+		case 2 :
+			point (getPoint().getX() + 1, getPoint().getY());
 			break;
-		case 3:
-			point(getPoint().getX(), getPoint().getY() + 1);
+		case 3 :
+			point (getPoint().getX(), getPoint().getY() + 1);
 			break;
-		case 4:
-			point(getPoint().getX() - 1, getPoint().getY());
+		case 4 :
+			point (getPoint().getX() - 1, getPoint().getY());
+			break;
+		default:
 			break;
 		}
 	}	
@@ -46,7 +48,7 @@ Bullet::isPlayerBullet()
 }
 
 void 
-Bullet::canMove(const bool & canMove)
+Bullet::canMove(const bool canMove)
 {
 	canMove_ = canMove;
 }
@@ -61,7 +63,8 @@ Bullet::~Bullet()
 {
 }
 
-std::vector<std::string> Bullet::place(std::vector<std::string>& field)
+std::vector<std::string> 
+Bullet::place(const std::vector<std::string>& field)
 {
 	std::vector<std::string> _field = field;
 	_field[getPoint().getY()][getPoint().getX()] = getBulletSymbol();

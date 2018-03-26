@@ -6,6 +6,6 @@
 class Place
 {
 public:
-	virtual std::vector<std::string> place(std::vector<std::string>& square) = 0;
+	virtual std::vector<std::string> place(const std::vector<std::string>& square) = 0;
 };
 #endif // !H_PLACE

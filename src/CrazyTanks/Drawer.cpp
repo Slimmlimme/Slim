@@ -12,13 +12,13 @@ Drawer::Drawer(const Field& field, const Info& info)
 }
 
 void 
-Drawer::field(const Field & field)
+Drawer::field(const Field& field)
 {
 	field_ = field;
 }
 
 void 
-Drawer::info(const Info & info)
+Drawer::info(const Info& info)
 {
 	info_ = info;
 }
@@ -33,6 +33,6 @@ Drawer::draw()
 		}
 		std::cout << std::endl;
 	}
-	info_.currentTime(clock());
+	info_.currentTime (clock());
 	std::cout << "Score: " << info_.getScore() << " Lives: " << info_.getPlayerHealth() << " Game time: " << info_.getTime()/1000;
 }

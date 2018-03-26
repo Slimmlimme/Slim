@@ -33,7 +33,7 @@ Point::setX(const int& x)
 }
 
 void 
-Point::y(const int& y)
+Point::setY(const int& y)
 {
 	y_ = y;
 }
