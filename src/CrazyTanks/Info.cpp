@@ -5,43 +5,43 @@ Info::Info()
 {
 }
 
-Info::Info(const int& score, const int& beginTime)
+Info::Info(const int score, const int beginTime)
 {
 	score_ = score;
 	beginTime_ = beginTime;
 }
 
-const int& 
+const int 
 Info::getScore() const
 {
 	return score_;
 }
 
 void 
-Info::score(const int& score)
+Info::score(const int score)
 {
 	score_ = score;
 }
 
-const int& 
+const int 
 Info::getPlayerHealth() const
 {
 	return playerHealth_;
 }
 
 void 
-Info::playerHealth(const int& playerHealth)
+Info::playerHealth(const int playerHealth)
 {
 	playerHealth_ = playerHealth;
 }
 
 void 
-Info::currentTime(const int& currentTime)
+Info::currentTime(const int currentTime)
 {
 	currentTime_ = currentTime;
 }
 
-const int& 
+const int
 Info::getTime() const
 {
 	return currentTime_ - beginTime_;

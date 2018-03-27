@@ -5,7 +5,7 @@ Field::Field()
 {
 }
 
-Field::Field(const int& length, const int& height)
+Field::Field(const int length, const int height)
 {
 	length_ = length;
 	height_ = height;

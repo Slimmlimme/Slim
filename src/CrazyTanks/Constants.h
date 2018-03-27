@@ -1,216 +1,54 @@
 #ifndef H_CONSTANTS
 #define H_CONSTANTS
-
-
 #pragma warning( disable : 4309 )
-inline int
-getFieldHeight()
-{
-	return 20;
-}
 
-inline int
-getActionCooldown()
-{
-	return 1500;
-}
+//Field and objects coords
+extern int getFieldHeight();
+extern int getFieldLength();
+extern int getFieldBeginX();
+extern int getFieldBeginY();
+extern int getFieldEndX();
+extern int getFieldEndY();
+extern int getPlayerStartPositionX();
+extern int getPlayerStartPositionY();
+extern int getGoldPositionX();
+extern int getGoldPositionY();
 
-inline int
-getArrayBeginIndex()
-{
-	return 0;
-}
+//Objects health
+extern int getEnemyHealth();
+extern int getPlayerHealth();
+extern int getMaxWallHealth();
+extern int getGoldHealth();
 
-inline int 
-getFieldLength()
-{
-	return 30;
-}
+//Directions
+extern int getDirectionUp();
+extern int getDirectionRight();
+extern int getDirectionDown();
+extern int getDirectionLeft();
 
-inline int
-getFieldBeginX()
-{
-	return 1;
-}
+//Objects amounts
+extern int getWallsAmount();
+extern int getFortressWallsAmount();
+extern int getMaxNumberOfBullets();
+extern int getEnemiesAmount();
 
-inline int
-getFieldBeginY()
-{
-	return 1;
-}
+//Array indexes
+extern int getArrayBeginIndex();
+extern int getPlayerTankIndex();
+extern int getEnemyTankBeginIndex();
 
-inline int
-getFieldEndX()
-{
-	return getFieldLength() - 2;
-}
+//Objects symbols
+extern char getPlayerSymbol();
+extern char getEnemySymbol();
+extern char getWallSymbol();
+extern char getFortressSymbol();
+extern char getGoldSymbol();
+extern char getBorderSymbol();
+extern char getBackgroundSymbol();
+extern char getBulletSymbol();
 
-inline int
-getFieldEndY()
-{
-	return getFieldHeight() - 2;
-}
-
-inline int 
-getEnemyHealth()
-{
-	return 1;
-}
-
-inline int 
-getPlayerHealth()
-{
-	return 3;
-}
-
-inline int
-getGoldHealth()
-{
-	return 1;
-}
-
-inline int 
-getDirectionUp()
-{
-	return 1;
-}
-
-inline int
-getDirectionRight()
-{
-	return 2;
-}
-
-inline int
-getDirectionDown()
-{
-	return 3;
-}
-
-inline int
-getDirectionLeft()
-{
-	return 4;
-}
-
-inline int 
-getWallsAmount()
-{
-	return 15;
-}
-
-inline int 
-getMaxNumberOfBullets()
-{
-	return 100;
-}
-
-inline int 
-getEnemiesAmount()
-{
-	return 5;
-}
-
-inline int 
-getMaxWallHealth()
-{
-	return 5;
-}
-
-inline int 
-getPlayerStartPositionX()
-{
-	return getFieldLength()/2+3;
-}
-
-inline int 
-getPlayerStartPositionY()
-{
-	return getFieldHeight() - 2;
-}
-
-inline int 
-getPlayerTankIndex()
-{
-	return 0;
-}
-
-inline int
-getEnemyTankBeginIndex()
-{
-	return getPlayerTankIndex() + 1;
-}
-
-inline char 
-getPlayerSymbol()
-{
-	return '%';
-}
-
-inline char 
-getEnemySymbol()
-{
-	return '¹';
-}
-
-inline char 
-getWallSymbol()
-{
-	return '#';
-}
-
-inline char 
-getFortressSymbol()
-{
-	return '@';
-}
-
-inline char 
-getGoldSymbol()
-{
-	return '$';
-}
-
-inline char 
-getBorderSymbol()
-{
-	return 178;
-}
-
-inline char 
-getBackgroundSymbol()
-{
-	return 176;
-}
-
-inline char 
-getBulletSymbol()
-{
-	return '*';
-}
-
-inline int 
-getGoldPositionX()
-{
-	return getFieldLength() / 2;
-}
-
-inline int 
-getGoldPositionY()
-{
-	return getFieldHeight() - 2;
-}
-
-inline int 
-getFortressWallsAmount()
-{
-	return 5;
-}
-
-inline int 
-getStartScore()
-{
-	return 0;
-}
+//Other constants
+extern int getActionCooldown();
+extern int getStartScore();
 #pragma warning( default : 4309 )
 #endif // !H_CONSTANTS

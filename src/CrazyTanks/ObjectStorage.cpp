@@ -6,7 +6,7 @@ ObjectStorage::ObjectStorage()
 }
 
 char 
-ObjectStorage::getObjectSymbol(const Point & point)
+ObjectStorage::getObjectSymbol(const Point& point)
 {
 	std::vector<std::string> field = field_.getField();
 	std::string row = field[point.getY()];
@@ -14,57 +14,60 @@ ObjectStorage::getObjectSymbol(const Point & point)
 }
 
 void 
-ObjectStorage::collide(const char & objectHit,const Point & objectPoint,const bool& playerBullet)
+ObjectStorage::collide(const char objectHit,const Point& objectPoint,const bool playerBullet)
 {
-	switch (objectHit){
-	case '#':
+	switch (objectHit) {
+	case '#' :
 		for (int i = 0; i < sizeOfWalls(); i++) {
 			Wall _wall = getWall(i);
 			if (_wall.getPoint().getX() == objectPoint.getX() && _wall.getPoint().getY() == objectPoint.getY()) {
 				_wall.getHurt();
-				wall(i, _wall);
+				wall (i, _wall);
 			}
 			
 		}
 		break;
-	case '¹':
+	case '¹' :
 		if (playerBullet) {
-			for (int i = 1; i < sizeOfTanks(); i++) {
+			for (int i = getEnemyTankBeginIndex(); i < sizeOfTanks(); i++) {
 				Tank enemy = getTank(i);
 				if (enemy.getPoint().getX() == objectPoint.getX() && enemy.getPoint().getY() == objectPoint.getY()) {
 					enemy.getHurt();
-					tank(i, enemy);
+					tank (i, enemy);
 					int score = info_.getScore();
-					info_.score(score++);
+					info_.score (score++);
 				}
 			}
 		}
-		break;
-	case '@':
+		break ;
+	case '@' :
 		if (!playerBullet) {
-			for (int i = 1; i < sizeOfFortress(); i++) {
+			for (int i = getArrayBeginIndex(); i < sizeOfFortress(); i++) {
 				Wall wall = getFortressWall(i);
 				if (wall.getPoint().getX() == objectPoint.getX() && wall.getPoint().getY() == objectPoint.getY()) {
 					wall.getHurt();
-					fortressWall(i, wall);
+					fortressWall (i, wall);
 				}
 			}
 		}
 		break;
-	case '%':
+	case '%' :
 		if (!playerBullet) {
-			Tank player = getTank(getPlayerTankIndex());
+			Tank player = getTank (getPlayerTankIndex());
 			player.getHurt();
-			tank(getPlayerTankIndex(), player);
-			info_.playerHealth(getTank(getPlayerTankIndex()).getHealth());
+			tank (getPlayerTankIndex(), player);
+			info_.playerHealth (getTank (getPlayerTankIndex()).getHealth());
 		}
 		break;
-	case '$':
+	case '$' :
 		if (!playerBullet) {
 			Gold _gold = getGold();
 			_gold.getHurt();
 			gold(_gold);
 		}
+		break;
+	default :
+		break;
 	}
 }
 
@@ -80,79 +83,80 @@ ObjectStorage::field(const Field& field)
 	field_ = field;
 }
 
-const Tank& 
-ObjectStorage::getTank(const int& index) const
+const Tank&
+ObjectStorage::getTank(const int index) const
 {
 	return tanks_[index];
 }
 
 void 
-ObjectStorage::tank(const int& index, const Tank& tank)
+ObjectStorage::tank(const int index, const Tank& tank)
 {
 	if(index < tanks_.size())
 		tanks_[index] = tank;
 	else tanks_.push_back (tank);
 }
 
-const int& 
+const int 
 ObjectStorage::sizeOfWalls() const
 {
 	return walls_.size();
 }
 
-const int& 
+const int 
 ObjectStorage::sizeOfTanks() const
 {
 	return tanks_.size();
 }
 
-const int& 
+const int 
 ObjectStorage::sizeOfBullets() const
 {
 	return bullets_.size();
 }
 
-const int & ObjectStorage::sizeOfFortress() const
+const int
+ObjectStorage::sizeOfFortress() const
 {
 	return fortress_.size();
 }
 
 void 
-ObjectStorage::deleteBullet(const int& index)
+ObjectStorage::deleteBullet(const int index)
 {
 	if (index < sizeOfBullets())
 		bullets_.erase (bullets_.begin() + index);
 }
 
 void 
-ObjectStorage::deleteTank(const int& index)
+ObjectStorage::deleteTank(const int index)
 {
 	if (index < sizeOfTanks())
 		tanks_.erase (tanks_.begin() + index);
 }
 
 void 
-ObjectStorage::deleteWall(const int& index)
+ObjectStorage::deleteWall(const int index)
 {
 	if (index < sizeOfWalls())
 		walls_.erase (walls_.begin() + index);
 }
 
 void 
-ObjectStorage::deleteFortressWall(const int& index)
+ObjectStorage::deleteFortressWall(const int index)
 {
 	if (index < getFortressWallsAmount())
 		fortress_.erase (fortress_.begin() + index);
 }
 
 const Bullet& 
-ObjectStorage::getBullet(const int& index) const
+ObjectStorage::getBullet(const int index) const
 {
 		return bullets_[index];
 }
 
 void 
-ObjectStorage::bullet(const int& index, const Bullet& bullet)
+ObjectStorage::bullet(const int index, const Bullet& bullet)
 {
 	if (index < bullets_.size())
 		bullets_[index] = bullet;
@@ -160,7 +164,7 @@ ObjectStorage::bullet(const int& index, const Bullet& bullet)
 }
 
 void 
-ObjectStorage::wall(const int& index, const Wall& wall)
+ObjectStorage::wall(const int index, const Wall& wall)
 {
 	if(index < walls_.size())
 		walls_[index] = wall;
@@ -168,13 +172,13 @@ ObjectStorage::wall(const int& index, const Wall& wall)
 }
 
 const Wall& 
-ObjectStorage::getFortressWall(const int& index) const
+ObjectStorage::getFortressWall(const int index) const
 {
 	return fortress_[index];
 }
 
 void 
-ObjectStorage::fortressWall(const int& index, const Wall& wall)
+ObjectStorage::fortressWall(const int index, const Wall& wall)
 {
 	if(index < fortress_.size())
 		fortress_[index] = wall;
@@ -210,7 +214,7 @@ ObjectStorage::~ObjectStorage()
 }
 
 const Wall& 
-ObjectStorage::getWall(const int& index) const
+ObjectStorage::getWall(const int index) const
 {
 	return walls_[index];
 }

@@ -5,13 +5,13 @@ class Info
 {
 public:
 	Info();
-	Info(const int& score, const int& beginTime);
-	const int& getScore() const;
-	void score(const int& score);
-	const int& getPlayerHealth() const;
-	void playerHealth(const int& playerHealth);
-	void currentTime(const int& currentTime);
-	const int& getTime() const;
+	Info(const int score, const int beginTime);
+	const int getScore() const;
+	void score(const int score);
+	const int getPlayerHealth() const;
+	void playerHealth(const int playerHealth);
+	void currentTime(const int currentTime);
+	const int getTime() const;
 private:
 	int score_;
 	int playerHealth_;

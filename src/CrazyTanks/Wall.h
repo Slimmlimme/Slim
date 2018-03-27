@@ -6,8 +6,8 @@ class Wall: public Object, Place
 {
 public:
 	Wall();
-	Wall(const int& health, const int& x, const int& y, const char& symbol);
-	const int& getHealth() const;
+	Wall(const int health, const int x, const int y, const char symbol);
+	const int getHealth() const;
 	void getHurt();
 	bool isDestroyed();
 	~Wall();

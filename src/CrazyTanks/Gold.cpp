@@ -5,7 +5,7 @@ Gold::Gold()
 {
 }
 
-Gold::Gold(const int& x, const int& y, const char& symbol) : Object(x, y, symbol)
+Gold::Gold(const int x, const int y, const char symbol) : Object(x, y, symbol)
 {
 	health_ = getGoldHealth();
 }
@@ -16,7 +16,7 @@ Gold::getHurt()
 	health_--;
 }
 
-const int& 
+const int
 Gold::getHealth() const
 {
 	return health_;

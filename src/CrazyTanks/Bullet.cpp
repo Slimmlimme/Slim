@@ -5,7 +5,7 @@ Bullet::Bullet()
 {
 }
 
-Bullet::Bullet(const int& direction, const int& x, const int& y, bool playerBullet, const char& symbol) : Object(x, y, symbol)
+Bullet::Bullet(const int direction, const int x, const int y, bool playerBullet, const char symbol) : Object(x, y, symbol)
 {
 	direction_ = direction;
 	playerBullet_ = playerBullet;
@@ -29,13 +29,13 @@ Bullet::move()
 		case 4 :
 			point (getPoint().getX() - 1, getPoint().getY());
 			break;
-		default:
+		default :
 			break;
 		}
 	}	
 }
 
-const bool& 
+const bool
 Bullet::collision() const
 {
 	return !canMove_;
@@ -53,7 +53,7 @@ Bullet::canMove(const bool canMove)
 	canMove_ = canMove;
 }
 
-const int& 
+const int 
 Bullet::getDirection() const
 {
 	return direction_;

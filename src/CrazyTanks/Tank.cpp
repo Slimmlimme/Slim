@@ -5,7 +5,7 @@ Tank::Tank()
 {
 }
 
-Tank::Tank(const int& health, const int& x, const int& y, const char& symbol, const bool isPlayer) : Object(x, y, symbol)
+Tank::Tank(const int health, const int x, const int y, const char symbol, const bool isPlayer) : Object(x, y, symbol)
 {
 	isPlayer_ = isPlayer;
 	health_ = health;
@@ -21,7 +21,7 @@ Tank::isAlive() const
 }
 
 
-const int& 
+const int 
 Tank::getHealth() const
 {
 	return health_;
@@ -37,21 +37,21 @@ void
 Tank::move()
 {
 	if (canMove_) {
-		pointOld(getPoint().getX(), getPoint().getY());
+		pointOld (getPoint().getX(), getPoint().getY());
 		switch (direction_) {
-		case 1:
-			point(getPoint().getX(), getPoint().getY() - 1);
+		case 1 :
+			point (getPoint().getX(), getPoint().getY() - 1);
 			break;
-		case 2:
-			point(getPoint().getX() + 1, getPoint().getY());
+		case 2 :
+			point (getPoint().getX() + 1, getPoint().getY());
 			break;
-		case 3:
-			point(getPoint().getX(), getPoint().getY() + 1);
+		case 3 :
+			point (getPoint().getX(), getPoint().getY() + 1);
 			break;
-		case 4:
-			point(getPoint().getX() - 1, getPoint().getY());
+		case 4 :
+			point (getPoint().getX() - 1, getPoint().getY());
 			break;
-		default:
+		default :
 			break;
 		}
 	}
@@ -66,30 +66,30 @@ Tank::isReadyForAction()
 }
 
 bool 
-Tank::behavior(const std::vector<std::string>& square, const int& xPlayer,const int& yPlayer,const int& xGold,const int& yGold)
+Tank::behavior(const std::vector<std::string>& square, const int xPlayer,const int yPlayer,const int xGold,const int yGold)
 {
 	if (isPlayer_) {
 		if (_kbhit()) {
 			switch (_getch()) {
-			case 72:
+			case 72 :
 				move();
 				direction_ = getDirectionUp();
 				return false;
-			case 80:
+			case 80 :
 				move();
 				direction_ = getDirectionDown();
 				return false;
-			case 75:
+			case 75 :
 				move();
 				direction_ = getDirectionLeft();
 				return false;
-			case 77:
+			case 77 :
 				move();
 				direction_ = getDirectionRight();
 				return false;
-			case 32:
+			case 32 :
 				return true;
-			default:
+			default :
 				return false;
 			};
 		}
@@ -99,12 +99,12 @@ Tank::behavior(const std::vector<std::string>& square, const int& xPlayer,const 
 		if (isReadyForAction()) {
 			cooldown_ = clock();
 			int distanceXGold, distanceYGold, distanceXPlayer, distanceYPlayer;
-			distanceXGold = abs(xGold - getPoint().getX());
-			distanceYGold = abs(yGold - getPoint().getY());
-			distanceXPlayer = abs(xPlayer - getPoint().getX());
-			distanceYPlayer = abs(yPlayer - getPoint().getY());
-			if (sqrt(pow(distanceXGold, 2) + pow(distanceYGold, 2)) > sqrt((pow(distanceXPlayer, 2) + pow(distanceYPlayer, 2)))) {
-				if (abs(getPoint().getX() - xPlayer) <= abs(getPoint().getY() - yPlayer)) {
+			distanceXGold = abs (xGold - getPoint().getX());
+			distanceYGold = abs (yGold - getPoint().getY());
+			distanceXPlayer = abs (xPlayer - getPoint().getX());
+			distanceYPlayer = abs (yPlayer - getPoint().getY());
+			if (sqrt (pow (distanceXGold, 2) + pow (distanceYGold, 2)) > sqrt (pow(distanceXPlayer, 2) + pow (distanceYPlayer, 2))) {
+				if (abs (getPoint().getX() - xPlayer) <= abs (getPoint().getY() - yPlayer)) {
 					if (xPlayer > getPoint().getX()) {
 						direction_ = getDirectionRight();
 						move();
@@ -141,7 +141,7 @@ Tank::behavior(const std::vector<std::string>& square, const int& xPlayer,const 
 				return false;
 			}
 			else {
-				if (abs(getPoint().getX() - xGold) <= abs(getPoint().getY() - yGold)) {
+				if (abs (getPoint().getX() - xGold) <= abs (getPoint().getY() - yGold)) {
 					if (xGold > getPoint().getX()) {
 						direction_ = getDirectionRight();
 						move();
@@ -189,18 +189,18 @@ Tank::shoot()
 }
 
 void 
-Tank::canMove(const bool& canMove)
+Tank::canMove(const bool canMove)
 {
 	canMove_ = canMove;
 }
 
-const bool& 
+const bool 
 Tank::isPlayer() const
 {
 	return isPlayer_;
 }
 
-const int& 
+const int
 Tank::getDirection() const
 {
 	return direction_;

@@ -5,12 +5,12 @@ Wall::Wall()
 {
 }
 
-Wall::Wall(const int& health, const int& x, const int& y, const char& symbol) : Object(x, y, symbol)
+Wall::Wall(const int health, const int x, const int y, const char symbol) : Object(x, y, symbol)
 {
 	health_ = health;
 }
 
-const int&
+const int
 Wall::getHealth() const
 {
 	return health_;

@@ -11,12 +11,12 @@ class Object
 {
 public:
 	Object();
-	Object(const int& x, const int& y, const char& symbol);
-	const Point& getPoint() const;
-	void point(const int& x, const int& y);
-	const Point& getPointOld() const;
-	void pointOld(const int& x, const int& y);
-	const char& getSymbol() const;
+	Object(const int x, const int y, const char symbol);
+	const Point getPoint() const;
+	void point(const int x, const int y);
+	const Point getPointOld() const;
+	void pointOld(const int x, const int y);
+	const char getSymbol() const;
 	virtual ~Object();
 private:
 	Point point_;

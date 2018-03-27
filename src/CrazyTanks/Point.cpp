@@ -14,26 +14,26 @@ Point::Point(const std::initializer_list<int>& coords)
 	y_ = *it;
 }
 
-const int& 
+const int 
 Point::getX() const
 {
 	return x_;
 }
 
-const int& 
+const int
 Point::getY() const
 {
 	return y_;
 }
 
 void 
-Point::setX(const int& x)
+Point::setX(const int x)
 {
 	x_ = x;
 }
 
 void 
-Point::setY(const int& y)
+Point::setY(const int y)
 {
 	y_ = y;
 }
